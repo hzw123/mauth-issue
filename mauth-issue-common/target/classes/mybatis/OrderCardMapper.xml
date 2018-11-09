@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.mauth.issue.common.mapper.OrderCardMapper" >
+    <resultMap id="BaseResultMap" type="cn.mauth.issue.common.entity.OrderCard">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="order_card_name" property="orderCardName" jdbcType="VARCHAR"/>
+        <result column="order_no" property="orderNo" jdbcType="BIGINT"/>
+        <result column="order_type" property="orderType" jdbcType="VARCHAR"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="total_price" property="totalPrice" jdbcType="DOUBLE"/>
+        <result column="user_pay_account" property="userPayAccount" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="load_password" property="loadPassword" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="auth_sign" property="authSign" jdbcType="VARCHAR"/>
+        <result column="days" property="days" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="column_list">
+        id,order_card_name,order_no,order_type,gmt_create,gmt_modified,
+        total_price,user_pay_account,pay_type,status,days,load_password,auth_sign
+    </sql>
+
+    <select id="count" parameterType="cn.mauth.issue.common.entity.OrderCard" resultType="java.lang.Integer">
+        select count(1) from order_card
+        where 1=1
+        <if test="orderCardName!=null">
+            and order_card_name LIKE CONCAT('%',#{orderCardName},'%')
+        </if>
+
+        <if test="orderNo>0">
+            and order_no =#{orderNo}
+        </if>
+
+        <if test="orderType!=null">
+            and order_type LIKE CONCAT('%',#{orderType},'%')
+        </if>
+
+        <if test="gmtCreate!=null">
+            and gmt_create=#{gmtCreate}
+        </if>
+
+        <if test="gmtModified!=null">
+            and gmt_modified=#{gmtModified}
+        </if>
+
+        <if test="totalPrice>0">
+            and total_price=#{totalPrice}
+        </if>
+
+        <if test="userPayAccount!=null">
+            and user_pay_account=#{userPayAccount}
+        </if>
+
+        <if test="payType!=null">
+            and pay_type=#{payType}
+        </if>
+
+        <if test="loadPassword!=null">
+            and load_password=#{loadPassword}
+        </if>
+
+        <if test="status!=null">
+            and status=#{status}
+        </if>
+
+        <if test="authSign!=null">
+            and auth_sign LIKE CONCAT('%',#{authSign},'%')
+        </if>
+
+        <if test="days>0">
+            and days=#{days}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="cn.mauth.issue.common.entity.OrderCard">
+        insert into order_card
+          (order_card_name,order_no,order_type,gmt_create,gmt_modified,
+          total_price,user_pay_account,pay_type,status,days,load_password,auth_sign)
+        values
+        (#{orderCardName},#{orderNo},#{orderType},NOW(),NOW(),
+        #{totalPrice},#{userPayAccount},#{payType},#{status},#{days},#{loadPassword},#{authSign})
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="column_list"/>
+        from order_card
+        where id=#{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="page" parameterType="cn.mauth.issue.util.RequestPage" resultMap="BaseResultMap">
+        SELECT
+        <include refid="column_list"/>
+        from order_card where 1=1
+        <if test="t!=null">
+            <if test="t.orderCardName!=null">
+                and order_card_name LIKE CONCAT('%',#{t.orderCardName},'%')
+            </if>
+
+            <if test="t.orderNo>0">
+                and order_no=#{orderNo}
+            </if>
+
+            <if test="t.orderType!=null">
+                and order_type LIKE CONCAT('%',#{t.orderType},'%')
+            </if>
+            <if test="t.gmtCreate!=null">
+                and gmt_create=#{t.gmtCreate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="t.gmtModified!=null">
+                and gmt_modified=#{t.gmtModified,jdbcType=TIMESTAMP}
+            </if>
+            <if test="t.loadPassword!=null">
+                and load_password=#{t.loadPassword}
+            </if>
+            <if test="t.totalPrice>0">
+                and total_price=#{t.totalPrice}
+            </if>
+
+            <if test="t.userPayAccount!=null">
+                and user_pay_account=#{t.userPayAccount}
+            </if>
+            <if test="t.payType!=null">
+                and pay_type=#{t.payType}
+            </if>
+            <if test="t.status!=null">
+                and status=#{t.status}
+            </if>
+
+            <if test="t.authSign!=null">
+                and auth_sign LIKE CONCAT('%',#{t.authSign},'%')
+            </if>
+            <if test="t.days>0">
+                and days=#{t.days}
+            </if>
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+        <if test="limitStart>=0">
+            limit ${limitStart},${pageSize}
+        </if>
+    </select>
+
+    <update id="update" parameterType="cn.mauth.issue.common.entity.OrderCard">
+        update order_card
+        <set>
+            <if test="orderCardName != null">
+                order_card_name=#{orderCardName,jdbcType=VARCHAR},
+            </if>
+
+            <if test="orderNo>0">
+                order_no=#{orderNo},
+            </if>
+
+            <if test="orderType != null">
+                order_type=#{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate!=null">
+                gmt_create=#{gmtCreate},
+            </if>
+            <if test="gmtModified!=null">
+                gmt_modified=#{gmtModified},
+            </if>
+            <if test="totalPrice>0">
+                total_price=#{totalPrice},
+            </if>
+
+            <if test="userPayAccount!=null">
+                user_pay_account=#{userPayAccount},
+            </if>
+            <if test="payType!=null">
+                pay_type=#{payType},
+            </if>
+
+            <if test="loadPassword!=null">
+                load_password=#{loadPassword},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+
+            <if test="authSign!=null">
+                auth_sign=#{authSign},
+            </if>
+            <if test="days>0">
+                days=#{days}
+            </if>
+        </set>
+        where id=#{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateAll" parameterType="cn.mauth.issue.common.entity.OrderCard">
+        update order_card
+        set
+            order_card_name=#{orderCardName},
+            order_no=#{orderNo},
+            order_type=#{orderType},
+            gmt_create=#{gmtCreate},
+            gmt_modified=#{gmtModified},
+            total_price=#{totalPrice},
+            user_pay_account=#{userPayAccount},
+            pay_type=#{payType},
+            status=#{status},
+            auth_sign=#{authSign},
+            days=#{days},
+            load_password=#{loadPassword}
+        where id=#{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateLoadPassword">
+        update order_card set load_password=#{loadPassword} where id=#{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from order_card where id=#{id}
+    </delete>
+
+    <select id="findByOrderNo" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="column_list"/>
+        from order_card where order_no=#{orderNO}
+    </select>
+
+    <select id="findLoadPassword" resultType="java.lang.String" parameterType="java.lang.Long">
+        select load_password from order_card where id=#{id}
+    </select>
+
+    <select id="selectStatist" parameterType="cn.mauth.issue.util.RequestPage" resultType="cn.mauth.issue.util.bjui.StatisticsInfo" >
+        select
+            oc.order_no as orderNo,
+            oc.gmt_create as createTime,
+            oc.total_price as totalFace,
+            oc.order_type as orderType,
+            count(DISTINCT cb.card_face_price) as amount,
+            sum(cb.amount) as total
+        FROM order_card oc,card_bills cb
+        where oc.id=cb.order_card_id
+        <if test="t!=null">
+            <if test="t.orderNo>0">
+                and   oc.order_no=#{t.orderNo}
+            </if>
+            <if test="t.start!=null">
+                and  oc.gmt_create>=#{t.start}
+            </if>
+            <if test="t.type!=null">
+                and  oc.order_type=#{t.type}
+            </if>
+            <if test="t.user!=null">
+                and oc.user_pay_account like CONCAT('%',#{t.user},'%')
+            </if>
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+        GROUP by oc.id
+        <if test="limitStart>=0">
+            limit ${limitStart},${pageSize}
+        </if>
+    </select>
+
+    <select id="statistCount" parameterType="cn.mauth.issue.util.bjui.StatisticalQuery" resultType="java.lang.Integer">
+        select count(1) FROM order_card where 1=1
+        <if test="orderNo>0">
+            and order_no=#{orderNo}
+        </if>
+        <if test="start!=null">
+            and gmt_create>=#{start}
+        </if>
+        <if test="type!=null">
+            and order_type=#{type}
+        </if>
+        <if test="user!=null">
+            and user_pay_account like CONCAT('%',#{user},'%')
+        </if>
+    </select>
+
+    <select id="findTotalStatistion" resultType="cn.mauth.issue.util.bjui.StatisticsInfo" parameterType="cn.mauth.issue.util.bjui.StatisticalQuery">
+            select
+                sum(oc.total_price) as totalFace,
+                sum(cb.amount) as total,
+                count(DISTINCT cb.card_face_price) as amount
+            FROM order_card oc,card_bills cb
+            where oc.id=cb.order_card_id
+            <if test="start!=null">
+                <if test="stopTime!=null">
+                    and oc.gmt_create BETWEEN #{start} and #{stopTime}
+                </if>
+            </if>
+            <if test="type!=null">
+                and oc.order_type=#{type}
+            </if>
+    </select>
+
+    <select id="findCashStatistion" resultType="cn.mauth.issue.util.bjui.StatisticsInfo" parameterType="cn.mauth.issue.util.bjui.StatisticalQuery">
+        select
+          sum(ci.card_face_price) cashOutFace,
+          count(oc.id) as cashOutCount
+        from
+          order_card oc,card_info ci
+        where
+          ci.status=2 and ci.order_card_id=oc.id
+        <if test="start!=null">
+            <if test="stopTime!=null">
+                and oc.gmt_create BETWEEN #{start} and #{stopTime}
+            </if>
+        </if>
+        <if test="type!=null">
+            and oc.order_type=#{type}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>cn.mauth.issue</groupId>
+		<artifactId>mauth-issue</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>mauth-issue-boss</artifactId>
+	<packaging>jar</packaging>
+
+	<name>mauth-issue-boss</name>
+	<description>充值-管理后台</description>
+
+	<properties>
+		<opensaml.version>3.2.0</opensaml.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>cn.mauth.issue</groupId>
+			<artifactId>mauth-issue-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+
+		<!-- shiro -->
+		<dependency>
+			<groupId>com.roncoo</groupId>
+			<artifactId>roncoo-spring-boot-starter-shiro</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.roncoo</groupId>
+			<artifactId>shiro-freemarker-tags</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-core</artifactId>
+			<version>${opensaml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-saml-api</artifactId>
+			<version>${opensaml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-saml-impl</artifactId>
+			<version>${opensaml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-messaging-api</artifactId>
+			<version>${opensaml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-messaging-impl</artifactId>
+			<version>${opensaml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-soap-api</artifactId>
+			<version>${opensaml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-soap-impl</artifactId>
+			<version>${opensaml.version}</version>
+		</dependency>
+
+		<!-- swagger2 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${pom.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>cn.mauth.issue.BossApplication</mainClass>
+					<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+					<executable>true</executable>
+					<fork>true</fork>
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

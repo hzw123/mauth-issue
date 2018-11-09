@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/mauth-issue.iml" filepath="$PROJECT_DIR$/mauth-issue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mauth-issue-boss/mauth-issue-boss.iml" filepath="$PROJECT_DIR$/mauth-issue-boss/mauth-issue-boss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mauth-issue-common/mauth-issue-common.iml" filepath="$PROJECT_DIR$/mauth-issue-common/mauth-issue-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mauth-issue-security-agent/mauth-issue-security-agent.iml" filepath="$PROJECT_DIR$/mauth-issue-security-agent/mauth-issue-security-agent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mauth-issue-util/mauth-issue-util.iml" filepath="$PROJECT_DIR$/mauth-issue-util/mauth-issue-util.iml" />
+    </modules>
+  </component>
+</project>

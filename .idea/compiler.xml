@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mauth-issue-boss" />
+        <module name="mauth-issue-common" />
+        <module name="mauth-issue-security-agent" />
+        <module name="mauth-issue-util" />
+        <module name="mauth-recharge-boss" />
+        <module name="roncoo-recharge-boss" />
+        <module name="roncoo-recharge-common" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mauth-issue" target="1.8" />
+      <module name="mauth-issue-boss" target="1.8" />
+      <module name="mauth-issue-common" target="1.8" />
+      <module name="mauth-issue-security-agent" target="1.8" />
+      <module name="mauth-issue-util" target="1.8" />
+      <module name="mauth-recharge" target="1.8" />
+      <module name="mauth-recharge-api" target="1.8" />
+      <module name="mauth-recharge-boss" target="1.8" />
+      <module name="mauth-recharge-common" target="1.8" />
+      <module name="mauth-recharge-crontab" target="1.8" />
+      <module name="mauth-recharge-gateway" target="1.8" />
+      <module name="mauth-recharge-util" target="1.8" />
+      <module name="roncoo-recharge" target="1.8" />
+      <module name="roncoo-recharge-api" target="1.5" />
+      <module name="roncoo-recharge-api-core" target="1.5" />
+      <module name="roncoo-recharge-api-longguo" target="1.5" />
+      <module name="roncoo-recharge-api-roncoo" target="1.5" />
+      <module name="roncoo-recharge-boss" target="1.8" />
+      <module name="roncoo-recharge-common" target="1.8" />
+      <module name="roncoo-recharge-crontab" target="1.5" />
+      <module name="roncoo-recharge-gateway" target="1.5" />
+      <module name="roncoo-recharge-util" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

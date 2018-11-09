@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.mauth.issue.common.mapper.CardMapper" >
+    <resultMap id="BaseResultMap" type="cn.mauth.issue.common.entity.Card">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="card_name" property="cardName" jdbcType="VARCHAR"/>
+        <result column="card_type" property="cardType" jdbcType="VARCHAR"/>
+        <result column="card_face_price" property="cardFacePrice" jdbcType="INTEGER"/>
+        <result column="validity_time" property="validityTime" jdbcType="INTEGER"/>
+        <result column="card_status" property="cardStatus" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="column_list">
+        id,gmt_create,card_name,card_type,card_face_price,validity_time,card_status
+    </sql>
+
+    <select id="count" parameterType="cn.mauth.issue.common.entity.Card" resultType="java.lang.Integer">
+        select count(1) from card
+        where 1=1
+        <if test="gmtCreate!=null">
+            and gmt_create=#{gmtCreate}
+        </if>
+        <if test="cardName!=null">
+            and card_name like CONCAT('%',#{cardName},'%')
+        </if>
+        <if test="cardType!=null">
+            and card_type like CONCAT('%',#{cardType},'%')
+        </if>
+        <if test="cardFacePrice>0">
+            and card_face_price=#{cardFacePrice}
+        </if>
+        <if test="validityTime>0">
+            and validity_time=#{validityTime}
+        </if>
+        <if test="cardStatus!=0">
+            and card_status=#{cardStatus}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="cn.mauth.issue.common.entity.Card">
+        INSERT into card
+              (gmt_create,card_name,card_type,card_face_price,validity_time,card_status)
+        VALUES
+              (#{gmtCreate},#{cardName},#{cardType},#{cardFacePrice},#{validityTime},#{cardStatus})
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="column_list"/>
+        from card
+        where id=#{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="putAway" resultMap="BaseResultMap">
+        select
+        <include refid="column_list"/>
+        from card
+        where card_status=2
+    </select>
+
+    <select id="page" parameterType="cn.mauth.issue.util.RequestPage" resultMap="BaseResultMap">
+        SELECT
+        <include refid="column_list"/>
+        from card where 1=1
+        <if test="t!=null">
+            <if test="t.gmtCreate!=null">
+                and gmt_create=#{t.gmtCreate}
+            </if>
+            <if test="t.cardName!=null">
+                and card_name like CONCAT('%',#{t.cardName},'%')
+            </if>
+            <if test="t.cardType!=null">
+                and card_type like CONCAT('%',#{t.cardType},'%')
+            </if>
+            <if test="t.cardFacePrice>0">
+                and card_face_price=#{t.cardFacePrice}
+            </if>
+            <if test="t.validityTime>0">
+                and validity_time=#{t.validityTime}
+            </if>
+            <if test="t.cardStatus!=0">
+                and card_status=#{t.cardStatus}
+            </if>
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+        <if test="limitStart>=0">
+            limit ${limitStart},${pageSize}
+        </if>
+    </select>
+
+    <update id="update" parameterType="cn.mauth.issue.common.entity.Card">
+        update card
+        <set>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate},
+            </if>
+            <if test="cardName != null">
+                card_name = #{cardName},
+            </if>
+            <if test="cardType != null">
+                card_type = #{cardType},
+            </if>
+            <if test="cardFacePrice != null">
+                card_face_price = #{cardFacePrice},
+            </if>
+            <if test="validityTime >0">
+                validity_time = #{validityTime},
+            </if>
+            <if test="cardStatus >0">
+                card_status = #{cardStatus}
+            </if>
+        </set>
+        where id=#{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateAll" parameterType="cn.mauth.issue.common.entity.Card">
+        update card
+        set
+            gmt_create = #{gmtCreate},
+            card_name = #{cardName},
+            card_type = #{cardType},
+            card_face_price = #{cardFacePrice},
+            validity_time = #{validityTime},
+            card_status = #{cardStatus}
+        where id=#{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from card where id=#{id}
+    </delete>
+
+
+</mapper>

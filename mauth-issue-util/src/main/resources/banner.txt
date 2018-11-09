@@ -1,0 +1,6 @@
+-----------------------------------------------------------
+
+mauth技术团队开发: https://issue.mauth.cn
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
+
+------------------------------------------------------------

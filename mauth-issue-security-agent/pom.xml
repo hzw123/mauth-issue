@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>cn.mauth.issue</groupId>
+		<artifactId>mauth-issue</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>mauth-issue-security-agent</artifactId>
+	<packaging>jar</packaging>
+
+	<name>mauth-issue-security-agent</name>
+	<description>安全代理</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>cn.mauth.issue</groupId>
+			<artifactId>mauth-issue-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>${pom.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>cn.mauth.issue.SecurityAgentApplication</mainClass>
+					<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+					<executable>true</executable>
+					<fork>true</fork>
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

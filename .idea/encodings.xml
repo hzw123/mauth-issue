@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mauth-issue-boss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mauth-issue-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mauth-issue-security-agent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mauth-issue-util" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
