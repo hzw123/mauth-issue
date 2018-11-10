@@ -1,7 +1,7 @@
 package cn.mauth.issue.boss.controller;
 
+import cn.mauth.issue.boss.controller.admin.SingleProfileController;
 import cn.mauth.issue.boss.saml.OpenSamlUtil;
-import cn.mauth.issue.boss.saml.Saml2Pro;
 import cn.mauth.issue.boss.saml.Saml2Token;
 import cn.mauth.issue.boss.utils.HttpUtils;
 import cn.mauth.issue.util.base.BaseController;
@@ -11,7 +11,6 @@ import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.Attribute;
 import org.opensaml.saml.saml2.core.Response;
 import org.opensaml.saml.saml2.core.StatusCode;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +23,6 @@ import java.util.Map;
 
 @Controller
 public class SSOController extends BaseController {
-
-    @Autowired
-    private Saml2Pro saml2Pro;
 
     @PostMapping("/sso")
     public String loginSSO(HttpServletRequest request, ModelMap modelMap)throws Exception{
@@ -77,7 +73,7 @@ public class SSOController extends BaseController {
             return redirect("/index");
 
         }else{
-            String login=saml2Pro.getLonginAndParam();
+            String login= SingleProfileController.saml2Pro.loginAndParam();
 
             logger.info("send:"+login);
 
@@ -90,7 +86,7 @@ public class SSOController extends BaseController {
     @GetMapping("/logout")
     public void logout(HttpServletResponse response) throws Exception{
         if(HttpUtils.isUser()){
-            String logout=saml2Pro.getLogoutAndParam();
+            String logout=SingleProfileController.saml2Pro.logoutAndParam();
             response.sendRedirect(logout);
         }else{
             response.sendRedirect("/exit");

@@ -1,10 +1,10 @@
-package cn.mauth.issue.boss.saml;
-
+package cn.mauth.issue.common.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Saml2Pro implements Serializable{
+public class SingleProfile implements Serializable{
+
 
     private static final long serialVersionUID = 1L;
 
@@ -70,27 +70,5 @@ public class Saml2Pro implements Serializable{
 
     public void setLogoutUrl(String logoutUrl) {
         this.logoutUrl = logoutUrl;
-    }
-
-    public String loginAndParam(){
-        StringBuffer sb=new StringBuffer(loginUrl);
-        sb.append("?SAMLRequest=");
-        sb.append(getLoginSAMLRequest());
-        return sb.toString();
-    }
-
-    public String logoutAndParam(){
-        StringBuffer sb=new StringBuffer(logoutUrl);
-        sb.append("?SAMLRequest=");
-        sb.append(getLogoutSAMLRequest());
-        return sb.toString();
-    }
-
-    private String getLoginSAMLRequest(){
-        return OpenSamlUtil.getSAMLRequest(loginUrl,assertionConsumerService,spEntityId);
-    }
-
-    private String getLogoutSAMLRequest(){
-        return OpenSamlUtil.getLogoutRequest(logoutUrl,singleLogoutService,spEntityId);
     }
 }

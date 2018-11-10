@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.mauth.issue.common.mapper.SingleProfileMapper" >
+    <resultMap id="BaseResultMap" type="cn.mauth.issue.common.entity.SingleProfile">
+        <id column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="up_time" property="upTime" jdbcType="TIMESTAMP"/>
+        <result column="sp_entity_id" property="spEntityId" jdbcType="VARCHAR"/>
+        <result column="assertion_consumer_service" property="assertionConsumerService" jdbcType="VARCHAR"/>
+        <result column="single_logout_service" property="singleLogoutService" jdbcType="VARCHAR"/>
+        <result column="login_url" property="loginUrl" jdbcType="VARCHAR"/>
+        <result column="logout_url" property="logoutUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getSingleeProfileByName" resultMap="BaseResultMap">
+        select *from single_profile where name=#{name}
+    </select>
+
+    <update id="update" parameterType="cn.mauth.issue.common.entity.SingleProfile">
+        update single_profile
+        <set>
+            <if test="1==1">
+                up_time=NOW(),
+            </if>
+            <if test="spEntityId != null">
+                sp_entity_id=#{spEntityId},
+            </if>
+            <if test="assertionConsumerService != null">
+                assertion_consumer_service=#{assertionConsumerService},
+            </if>
+            <if test="singleLogoutService != null">
+                single_logout_service=#{singleLogoutService},
+            </if>
+            <if test="loginUrl != null">
+                login_url=#{loginUrl},
+            </if>
+            <if test="logoutUrl != null">
+                logout_url=#{logoutUrl},
+            </if>
+        </set>
+        where name=#{name}
+    </update>
+</mapper>
